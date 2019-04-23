@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.HBox;
@@ -15,9 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -61,9 +61,7 @@ public class Main extends Application {
         Circle redDisc = new Circle(xP, yP, 45);
         redDisc.setFill(Color.RED);
 
-
         return redDisc;
-
     }
 
     public static Circle drawYellowDisc(int xP, int yP, int radius) {
@@ -71,20 +69,16 @@ public class Main extends Application {
         Circle redDisc = new Circle(xP, yP, 45);
         redDisc.setFill(Color.YELLOW);
 
-
         return redDisc;
-
     }
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
 
         launch(args);
     }
 
     public void start(Stage primaryStage) throws Exception {
 
-
-//
         VBox mainWindow = new VBox(5);
         HBox starters = new HBox(5);
         starters.setAlignment(Pos.CENTER);
@@ -99,24 +93,13 @@ public class Main extends Application {
 
         Board board = new Board();
 
-
         Button button1 = new Button("Column One");
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 1);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -127,17 +110,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 2);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -148,17 +121,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 3);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -169,17 +132,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 4);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -190,17 +143,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 5);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -211,17 +154,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 6);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
@@ -232,34 +165,13 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 board.addChecker(CheckerColor.RED, 7);
 
-                placeRedChecker(board, discField);
-
-                checkRedWinner(board);
-
-                waitAsecond();
-
-                board.compMove(CheckerColor.YELLOW);
-
-                placeYellowChecker(board, discField);
-
-                checkYellowWinner(board);
+                buttonHandling(board, discField);
             }
 
         });
 
 
-//        Button button11 = new Button("Print Board");
-//        button11.setOnAction((event -> {
-//            System.out.println(board);
-//        }));
-//
-//        Button button12 = new Button("White Wins?");
-//        button11.setOnAction((event -> {
-//            board.checkWinningCondition("White");
-//        }));
-
         service.getChildren().addAll(button1, button2, button3, button4, button5, button6, button7);
-//        starters.getChildren().addAll(button11, button12);
         yard.getChildren().add(playground);
         yard.getChildren().add(discField);
         mainWindow.getChildren().addAll(service, yard);
@@ -268,20 +180,53 @@ public class Main extends Application {
 
         primaryStage.setTitle("ConnectFour");
         primaryStage.setScene(scene);
+
+
         primaryStage.show();
+
+//        To tylko takie testowe zabawy, później usunę :)
+
+//        VBox winnerScreen = new VBox();
+//        Label label1 = new Label("You win, congratulations! Do you want to play again?");
+//        label1.setFont(new Font(20));
+//        Button again = new Button("YES");
+//        Button nope = new Button("NO");
+//        winnerScreen.getChildren().addAll(label1, again, nope);
+//        Scene winnerScene = new Scene(winnerScreen, 500, 400);
+//        again.setOnAction(e -> primaryStage.setScene(scene));
+//        nope.setOnAction(e -> System.exit(-1));
+//        primaryStage.setScene(winnerScene);
+//        primaryStage.show();
+
+    }
+
+
+    public void buttonHandling(Board board, Pane discField) {
+        placeRedChecker(board, discField);
+
+        checkRedWinner(board);
+
+        waitAsecond();
+
+        board.compMove(CheckerColor.YELLOW);
+
+        placeYellowChecker(board, discField);
+
+        checkYellowWinner(board);
 
     }
 
     public void checkRedWinner(Board board) {
-        board.checkWinningCondition("Red");
-        board.checkWinningCondition2("Red");
-        board.checkWinningCondition3("Red");
+        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
+            System.out.println("Red Wins");
+        }
+
     }
 
     public void checkYellowWinner(Board board) {
-        board.checkWinningCondition("Red");
-        board.checkWinningCondition2("Red");
-        board.checkWinningCondition3("Red");
+        if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
+            System.out.println("Yellow Wins");
+        }
     }
 
     public void waitAsecond() {
@@ -293,8 +238,8 @@ public class Main extends Application {
     }
 
     public void placeRedChecker(Board board, Pane discField) {
-        int xPosRed = board.getCheckers().get(board.getCheckers().size()-1).getX();
-        int yPosRed = board.getCheckers().get(board.getCheckers().size()-1).getY();
+        int xPosRed = board.getCheckers().get(board.getCheckers().size() - 1).getX();
+        int yPosRed = board.getCheckers().get(board.getCheckers().size() - 1).getY();
 
         int xAxisRed = -640 + ((xPosRed - 1) * 95);
         int yAxisRed = 540 - ((yPosRed - 1) * 95);
@@ -358,14 +303,6 @@ class Board {
 
     public Board() {
         checkers.addAll(Arrays.asList(
-//                new Checker(1, 1, Color.RED),
-//                new Checker(2, 1, Color.YELLOW),
-//                new Checker(3, 1, Color.RED),
-//                new Checker(4, 1, Color.YELLOW),
-//                new Checker(1, 2, Color.YELLOW),
-//                new Checker(3, 2, Color.RED),
-//                new Checker(4, 2, Color.YELLOW)
-
         ));
     }
 
@@ -387,9 +324,7 @@ class Board {
                         .filter(checker -> IntStream.range(finalJ, finalJ + 4).boxed().collect(Collectors.toList()).contains(checker.getX()))
                         .count();
                 if (counter == 4) {
-                    System.out.println(color + " Wins!");
                     return true;
-
                 }
             }
         }
@@ -409,7 +344,6 @@ class Board {
                         .filter(checker -> IntStream.range(finalJ, finalJ + 4).boxed().collect(Collectors.toList()).contains(checker.getY()))
                         .count();
                 if (counter == 4) {
-                    System.out.println(color + " Wins");
                     return true;
                 }
             }
@@ -417,6 +351,7 @@ class Board {
         return false;
     }
 
+    // badanie osi ukośnych
     public Boolean checkWinningCondition3(String color) {
 
         final int WIDTH = 7;
@@ -434,35 +369,30 @@ class Board {
                 int finalH = h;
                 for (int delta = 0; delta < 4; delta++) {
                     int finalDelta = delta;
-                    win1 &= checkers.stream().filter(c->c.getColor().equals(color)).filter(c -> c.getX().equals(finalW + finalDelta)).filter(c -> c.getY().equals(finalH + finalDelta)).findAny().isPresent();
-                    win2 &= checkers.stream().filter(c->c.getColor().equals(color)).filter(c -> c.getX().equals(finalW + finalDelta)).filter(c -> c.getY().equals(finalH - finalDelta)).findAny().isPresent();
-                    win3 &= checkers.stream().filter(c->c.getColor().equals(color)).filter(c -> c.getX().equals(finalW - finalDelta)).filter(c -> c.getY().equals(finalH + finalDelta)).findAny().isPresent();
-                    win4 &= checkers.stream().filter(c->c.getColor().equals(color)).filter(c -> c.getX().equals(finalW - finalDelta)).filter(c -> c.getY().equals(finalH - finalDelta)).findAny().isPresent();
+                    win1 &= checkers.stream().filter(c -> c.getColor().equals(color)).filter(c -> c.getX().equals(finalW + finalDelta)).filter(c -> c.getY().equals(finalH + finalDelta)).findAny().isPresent();
+                    win2 &= checkers.stream().filter(c -> c.getColor().equals(color)).filter(c -> c.getX().equals(finalW + finalDelta)).filter(c -> c.getY().equals(finalH - finalDelta)).findAny().isPresent();
+                    win3 &= checkers.stream().filter(c -> c.getColor().equals(color)).filter(c -> c.getX().equals(finalW - finalDelta)).filter(c -> c.getY().equals(finalH + finalDelta)).findAny().isPresent();
+                    win4 &= checkers.stream().filter(c -> c.getColor().equals(color)).filter(c -> c.getX().equals(finalW - finalDelta)).filter(c -> c.getY().equals(finalH - finalDelta)).findAny().isPresent();
                 }
 
                 if (win1 || win2 || win3 || win4) {
-                    System.out.println(color + " Wins");
                     return true;
                 }
-
             }
         }
         return false;
     }
 
 
-
-
     // Human adding a checker
     public Boolean addChecker(String color, Integer xCord) {
-        if(checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()){
-                  Integer yCord= checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c->c.getY()).max().getAsInt();
-                  checkers.add(new Checker(xCord, yCord + 1, color));
+        if (checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()) {
+            Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c -> c.getY()).max().getAsInt();
+            checkers.add(new Checker(xCord, yCord + 1, color));
 
         } else {
 
-            checkers.add(new Checker(xCord,  1, color));
-
+            checkers.add(new Checker(xCord, 1, color));
         }
 
         return true;
@@ -473,16 +403,15 @@ class Board {
 
         int xCordComp = randomNumber(1, 7);
 
-        if(checkers.stream().filter(c->c.getX().equals(xCordComp)).findAny().isPresent()){
-            Integer yCord = checkers.stream().filter(c->c.getX().equals(xCordComp)).mapToInt(c->c.getY()).max().getAsInt();
-            checkers.add(new Checker(xCordComp, yCord + 1, "Yellow" ));
+        if (checkers.stream().filter(c -> c.getX().equals(xCordComp)).findAny().isPresent()) {
+            Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCordComp)).mapToInt(c -> c.getY()).max().getAsInt();
+            checkers.add(new Checker(xCordComp, yCord + 1, "Yellow"));
         } else {
 
-        checkers.add(new Checker(xCordComp,1, "Yellow" ));
+            checkers.add(new Checker(xCordComp, 1, "Yellow"));
         }
         return true;
     }
-
 
     @Override
     public String toString() {
@@ -495,8 +424,7 @@ class Board {
         Random random = new Random();
         return random.nextInt((max - min) + 1) + min;
     }
-
-
-
 }
+
+
 
