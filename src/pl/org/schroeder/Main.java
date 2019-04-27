@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-//    Board board = new Board();
+    Board board = new Board();
 //    Layout layout = new Layout();
 //    Engine engine = new Engine();
 
