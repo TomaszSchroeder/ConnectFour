@@ -1,13 +1,10 @@
-package com.kodilla.connect4;
+package pl.org.schroeder;
 
 import javafx.scene.layout.Pane;
 
-import static com.kodilla.connect4.Main.displayLose;
-import static com.kodilla.connect4.Main.displayWin;
-
 public class Engine {
 
-    Layout layout;
+    Layout.BuildLayout buildLayout;
 
     public Engine() {
 
@@ -30,8 +27,8 @@ public class Engine {
     public void checkRedWinner(Board board) {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
             System.out.println("Red Wins");
-            wait3sec();
-            displayWin();
+//            wait3sec();
+//            Main.displayWin();
         }
 
     }
@@ -40,8 +37,8 @@ public class Engine {
     public void checkYellowWinner(Board board) {
         if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
             System.out.println("Yellow Wins");
-            wait3sec();
-            displayLose();
+//            wait3sec();
+//            Main.displayLose();
         }
     }
 
@@ -68,7 +65,7 @@ public class Engine {
         int xAxisRed = -640 + ((xPosRed - 1) * 95);
         int yAxisRed = 540 - ((yPosRed - 1) * 95);
 
-        discField.getChildren().add(layout.drawRedDisc(xAxisRed, yAxisRed, 45));
+        discField.getChildren().add(buildLayout.drawRedDisc(xAxisRed, yAxisRed, 45));
     }
 
     public void placeYellowChecker(Board board, Pane discField) {
@@ -78,7 +75,7 @@ public class Engine {
         int xAxisYel = -640 + ((xPosYel - 1) * 95);
         int yAxisYel = 540 - ((yPosYel - 1) * 95);
 
-        discField.getChildren().add(layout.drawYellowDisc(xAxisYel, yAxisYel, 45));
+        discField.getChildren().add(buildLayout.drawYellowDisc(xAxisYel, yAxisYel, 45));
     }
 
 

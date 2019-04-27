@@ -1,4 +1,4 @@
-package com.kodilla.connect4;
+package pl.org.schroeder;
 
 public class Checker {
     private Integer x, y;

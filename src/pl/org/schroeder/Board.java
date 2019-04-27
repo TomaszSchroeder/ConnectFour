@@ -1,4 +1,4 @@
-package com.kodilla.connect4;
+package pl.org.schroeder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,6 +97,7 @@ public class Board {
     public Boolean addChecker(String color, Integer xCord) {
         if (checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()) {
             Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c -> c.getY()).max().getAsInt();
+
             checkers.add(new Checker(xCord, yCord + 1, color));
 
         } else {
