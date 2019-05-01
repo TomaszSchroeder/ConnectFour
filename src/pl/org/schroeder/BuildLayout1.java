@@ -1,6 +1,5 @@
 package pl.org.schroeder;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,14 +17,36 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BuildLayout1 {
 
-    static Stage stage;
+    Stage stage = new Stage();
+    Board board = new Board();
+    Engine engine;
+    Pane discField;
+
+    Map<Integer, Button> buttonList = new HashMap<>();
 
     public BuildLayout1() {
+
+        this.engine = new Engine(this);
+
+        buttonList.put(1, new Button("Column One"));
+        buttonList.put(2, new Button("Column Two"));
+        buttonList.put(3, new Button("Column Three"));
+        buttonList.put(4, new Button("Column Four"));
+        buttonList.put(5, new Button("Column Five"));
+        buttonList.put(6, new Button("Column Six"));
+        buttonList.put(7, new Button("Column Seven"));
     }
 
-    public static Shape makeGrid() {
+    public void setEventHandlerOnButton(Integer id, EventHandler eventHandler) {
+        buttonList.get(id).setOnAction(eventHandler);
+    }
+
+    public Shape makeGrid() {
         Shape shape = new Rectangle(705, 610);
 
         for (int y = 0; y < 6; y++) {
@@ -54,7 +75,7 @@ public class BuildLayout1 {
         return shape;
     }
 
-    public static Circle drawRedDisc(int xP, int yP, int radius) {
+    public Circle drawRedDisc(int xP, int yP) {
 
         Circle redDisc = new Circle(xP, yP, 45);
         redDisc.setFill(Color.RED);
@@ -62,7 +83,7 @@ public class BuildLayout1 {
         return redDisc;
     }
 
-    public static Circle drawYellowDisc(int xP, int yP, int radius) {
+    public Circle drawYellowDisc(int xP, int yP) {
 
         Circle redDisc = new Circle(xP, yP, 45);
         redDisc.setFill(Color.YELLOW);
@@ -70,11 +91,10 @@ public class BuildLayout1 {
         return redDisc;
     }
 
-    public static void displayStart() {
-        Stage stage = new Stage();
-        Board board = new Board();
+    public void displayStart() {
 
-        Engine engine = new Engine();
+        board = new Board();
+
 
         VBox mainWindow = new VBox(5);
         HBox starters = new HBox(5);
@@ -88,85 +108,87 @@ public class BuildLayout1 {
         Pane discField = new Pane();
         discField.setMaxSize(705, 610);
 
-        Button button1 = new Button("Column One");
-        button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 1);
+        service.getChildren().addAll(buttonList.values());
 
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        Button button2 = new Button("Column Two");
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 2);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        Button button3 = new Button("Column Three");
-        button3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 3);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        Button button4 = new Button("Column Four");
-        button4.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 4);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-
-        Button button5 = new Button("Column Five");
-        button5.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 5);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        Button button6 = new Button("Column Six");
-        button6.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 6);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        Button button7 = new Button("Column Seven");
-        button7.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                board.addChecker(CheckerColor.RED, 7);
-
-                engine.buttonHandling(board, discField);
-            }
-
-        });
-
-        service.getChildren().addAll(button1, button2, button3, button4, button5, button6, button7);
+//        Button button1 = new Button("Column One");
+//        button1.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 1);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        Button button2 = new Button("Column Two");
+//        button2.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 2);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        Button button3 = new Button("Column Three");
+//        button3.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 3);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        Button button4 = new Button("Column Four");
+//        button4.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 4);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//
+//        Button button5 = new Button("Column Five");
+//        button5.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 5);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        Button button6 = new Button("Column Six");
+//        button6.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 6);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        Button button7 = new Button("Column Seven");
+//        button7.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                board.addChecker(CheckerColor.RED, 7);
+//
+//                engine.buttonHandling(board, discField);
+//            }
+//
+//        });
+//
+//        service.getChildren().addAll(button1, button2, button3, button4, button5, button6, button7);
         yard.getChildren().add(playground);
         yard.getChildren().add(discField);
         mainWindow.getChildren().addAll(service, yard);
@@ -179,38 +201,48 @@ public class BuildLayout1 {
         stage.show();
     }
 
-    public static void displayWin() {
-
+    public void displayEnd() {
         VBox winnerScreen = new VBox();
-        Label info = new Label("You win, congratulations! Do you want to play again?");
-        info.setFont(new Font(20));
+        Label winInfo = new Label("You win, congratulations! Do you want to play again?");
+        winInfo.setFont(new Font(20));
+        VBox loserScreen = new VBox();
+        Label loseInfo = new Label("Such a shame, you've lost! Do you want to play again?");
+        loseInfo.setFont(new Font(20));
         Button again = new Button("YES");
         Button nope = new Button("NO");
-        winnerScreen.getChildren().addAll(info, again, nope);
+        winnerScreen.getChildren().addAll(winInfo, again, nope);
         Scene winnerScene = new Scene(winnerScreen, 500, 400);
-
-        stage.setScene(winnerScene);
-        stage.show();
-
+        loserScreen.getChildren().addAll(loseInfo, again, nope);
+        Scene loserScene = new Scene(loserScreen, 500, 400);
+        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
+            stage.setScene(winnerScene);
+            stage.show();
+        } else if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
+            stage.setScene(loserScene);
+            stage.show();
+        }
         again.setOnAction(e -> displayStart());
         nope.setOnAction(e -> System.exit(-1));
     }
 
-    public static void displayLose() {
+    public void placeRedChecker(Board board) {
+        int xPosRed = board.getCheckers().get(board.getCheckers().size() - 1).getX();
+        int yPosRed = board.getCheckers().get(board.getCheckers().size() - 1).getY();
 
-        VBox winnerScreen = new VBox();
-        Label info = new Label("Such a shame, you've lost! Do you want to play again?");
-        info.setFont(new Font(20));
-        Button again = new Button("YES");
-        Button nope = new Button("NO");
-        winnerScreen.getChildren().addAll(info, again, nope);
-        Scene winnerScene = new Scene(winnerScreen, 500, 400);
+        int xAxisRed = -640 + ((xPosRed - 1) * 95);
+        int yAxisRed = 540 - ((yPosRed - 1) * 95);
 
-        stage.setScene(winnerScene);
-        stage.show();
+        discField.getChildren().add(drawRedDisc(xAxisRed, yAxisRed));
+    }
 
-        again.setOnAction(e -> displayStart());
-        nope.setOnAction(e -> System.exit(-1));
+    public void placeYellowChecker(Board board) {
+        int xPosYel = board.getCheckers().get(board.getCheckers().size() - 1).getX();
+        int yPosYel = board.getCheckers().get(board.getCheckers().size() - 1).getY();
+
+        int xAxisYel = -640 + ((xPosYel - 1) * 95);
+        int yAxisYel = 540 - ((yPosYel - 1) * 95);
+
+        discField.getChildren().add(drawYellowDisc(xAxisYel, yAxisYel));
     }
 
 }
