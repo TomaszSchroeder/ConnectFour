@@ -5,7 +5,7 @@ import javafx.application.Platform;
 public class Engine {
 
     BuildLayout1 buildLayout1;
-    Board board;
+    Board board = new Board();
 
 
     public Engine(BuildLayout1 buildLayout1) {

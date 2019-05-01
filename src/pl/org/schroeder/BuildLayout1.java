@@ -23,15 +23,16 @@ import java.util.Map;
 public class BuildLayout1 {
 
     Stage stage = new Stage();
-    Board board = new Board();
+
     Engine engine;
     Pane discField;
+    Board board;
 
     Map<Integer, Button> buttonList = new HashMap<>();
 
     public BuildLayout1() {
 
-        this.engine = new Engine(this);
+
 
         buttonList.put(1, new Button("Column One"));
         buttonList.put(2, new Button("Column Two"));
@@ -40,6 +41,8 @@ public class BuildLayout1 {
         buttonList.put(5, new Button("Column Five"));
         buttonList.put(6, new Button("Column Six"));
         buttonList.put(7, new Button("Column Seven"));
+
+        this.engine = new Engine(this);
     }
 
     public void setEventHandlerOnButton(Integer id, EventHandler eventHandler) {
