@@ -7,7 +7,6 @@ public class Engine {
     BuildLayout1 buildLayout1;
     Board board = new Board();
 
-
     public Engine(BuildLayout1 buildLayout1) {
         this.buildLayout1 = buildLayout1;
 
@@ -38,7 +37,6 @@ public class Engine {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
             System.out.println("Red Wins");
         }
-
     }
 
     public void checkYellowWinner(Board board) {

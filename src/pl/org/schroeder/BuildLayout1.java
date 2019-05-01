@@ -25,14 +25,13 @@ public class BuildLayout1 {
     Stage stage = new Stage();
 
     Engine engine;
-    Pane discField;
+    Pane discField = new Pane();
     Board board;
 
     Map<Integer, Button> buttonList = new HashMap<>();
 
+
     public BuildLayout1() {
-
-
 
         buttonList.put(1, new Button("Column One"));
         buttonList.put(2, new Button("Column Two"));
@@ -98,7 +97,6 @@ public class BuildLayout1 {
 
         board = new Board();
 
-
         VBox mainWindow = new VBox(5);
         HBox starters = new HBox(5);
         starters.setAlignment(Pos.CENTER);
@@ -108,90 +106,11 @@ public class BuildLayout1 {
         yard.setAlignment(Pos.CENTER);
 
         Shape playground = makeGrid();
-        Pane discField = new Pane();
+
         discField.setMaxSize(705, 610);
 
         service.getChildren().addAll(buttonList.values());
 
-//        Button button1 = new Button("Column One");
-//        button1.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 1);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        Button button2 = new Button("Column Two");
-//        button2.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 2);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        Button button3 = new Button("Column Three");
-//        button3.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 3);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        Button button4 = new Button("Column Four");
-//        button4.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 4);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//
-//        Button button5 = new Button("Column Five");
-//        button5.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 5);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        Button button6 = new Button("Column Six");
-//        button6.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 6);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        Button button7 = new Button("Column Seven");
-//        button7.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                board.addChecker(CheckerColor.RED, 7);
-//
-//                engine.buttonHandling(board, discField);
-//            }
-//
-//        });
-//
-//        service.getChildren().addAll(button1, button2, button3, button4, button5, button6, button7);
         yard.getChildren().add(playground);
         yard.getChildren().add(discField);
         mainWindow.getChildren().addAll(service, yard);
