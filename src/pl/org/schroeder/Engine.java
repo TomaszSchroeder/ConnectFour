@@ -10,7 +10,7 @@ public class Engine {
     public Engine(BuildLayout1 buildLayout1) {
         this.buildLayout1 = buildLayout1;
 
-        for(int i=1; i<8; i++) {
+        for (int i = 1; i < 8; i++) {
             int finalI = i;
             buildLayout1.setEventHandlerOnButton(i, event -> {
                 board.addChecker(CheckerColor.RED, finalI);
@@ -36,15 +36,16 @@ public class Engine {
     public void checkRedWinner(Board board) {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
             System.out.println("Red Wins");
+            buildLayout1.displayEnd();
         }
     }
 
     public void checkYellowWinner(Board board) {
         if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
             System.out.println("Yellow Wins");
+            buildLayout1.displayEnd();
         }
     }
-
 
     public void afterTurns(Board board) {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {

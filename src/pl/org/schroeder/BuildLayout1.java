@@ -124,27 +124,32 @@ public class BuildLayout1 {
     }
 
     public void displayEnd() {
+
         VBox winnerScreen = new VBox();
         Label winInfo = new Label("You win, congratulations! Do you want to play again?");
         winInfo.setFont(new Font(20));
+
         VBox loserScreen = new VBox();
         Label loseInfo = new Label("Such a shame, you've lost! Do you want to play again?");
         loseInfo.setFont(new Font(20));
+
         Button again = new Button("YES");
         Button nope = new Button("NO");
-        winnerScreen.getChildren().addAll(winInfo, again, nope);
-        Scene winnerScene = new Scene(winnerScreen, 500, 400);
-        loserScreen.getChildren().addAll(loseInfo, again, nope);
-        Scene loserScene = new Scene(loserScreen, 500, 400);
-        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
+        again.setOnAction(e -> displayStart());
+        nope.setOnAction(e -> System.exit(-1));
+
+        if ((engine.board.checkWinningCondition("Red")) || (engine.board.checkWinningCondition2("Red")) || (engine.board.checkWinningCondition3("Red"))) {
+            winnerScreen.getChildren().addAll(winInfo, again, nope);
+            Scene winnerScene = new Scene(winnerScreen, 500, 400);
             stage.setScene(winnerScene);
             stage.show();
-        } else if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
+
+        } else if ((engine.board.checkWinningCondition("Yellow")) || (engine.board.checkWinningCondition2("Yellow")) || (engine.board.checkWinningCondition3("Yellow"))) {
+            loserScreen.getChildren().addAll(loseInfo, again, nope);
+            Scene loserScene = new Scene(loserScreen, 500, 400);
             stage.setScene(loserScene);
             stage.show();
         }
-        again.setOnAction(e -> displayStart());
-        nope.setOnAction(e -> System.exit(-1));
     }
 
     public void placeRedChecker(Board board) {
@@ -166,5 +171,6 @@ public class BuildLayout1 {
 
         discField.getChildren().add(drawYellowDisc(xAxisYel, yAxisYel));
     }
+
 
 }
