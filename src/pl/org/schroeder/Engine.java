@@ -20,17 +20,37 @@ public class Engine {
     }
 
     public void buttonHandling(Board board) {
-        buildLayout1.placeRedChecker(board);
 
-        checkRedWinner(board);
 
-        board.compMove(CheckerColor.YELLOW);
+            buildLayout1.placeRedChecker(board);
+            if(checkWinner(board)==true) {
+                buildLayout1.displayEnd();
+            } else {
 
-        buildLayout1.placeYellowChecker(board);
+                board.compMove(CheckerColor.YELLOW);
 
-        checkYellowWinner(board);
+                buildLayout1.placeYellowChecker(board);
+                if(checkWinner(board)==true) {
+                    buildLayout1.displayEnd();
+                }
+//
+//                checkWinner(board);
+//
+//                Platform.runLater(() -> afterTurns(board));
+            }
+    }
 
-        Platform.runLater(() -> afterTurns(board));
+
+    public boolean checkWinner(Board board) {
+        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
+            System.out.println("Red Wins");
+            buildLayout1.displayEnd();
+            return true;
+        } else if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
+            System.out.println("Yellow Wins");
+            buildLayout1.displayEnd();
+            return true;
+        } return false;
     }
 
     public void checkRedWinner(Board board) {
