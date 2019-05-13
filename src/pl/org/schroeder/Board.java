@@ -1,8 +1,6 @@
 package pl.org.schroeder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -96,27 +94,37 @@ public class Board {
     // Human adding a checker
     public Boolean addChecker(String color, Integer xCord) {
 
-        if (checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()) {
-            Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c -> c.getY()).max().getAsInt();
 
-            checkers.add(new Checker(xCord, yCord + 1, color));
+            if (checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()) {
+                Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c -> c.getY()).max().getAsInt();
 
-        } else {
+                checkers.add(new Checker(xCord, yCord + 1, color));
+                if(yCord == 7) {
+                    Validators.disableColumn(xCord);
+                }
+            } else {
 
-            checkers.add(new Checker(xCord, 1, color));
-        }
+                checkers.add(new Checker(xCord, 1, color));
+            }
 
         return true;
+
     }
 
     // Computer adding a checker
     public Boolean compMove(String color) {
 
-        int xCordComp = randomNumber(1, 7);
+        List<Integer> randomComp = new ArrayList<>(Validators.getAvailableColumns());
+        Collections.shuffle(randomComp);
+        int xCordComp = randomComp.get(0);
 
         if (checkers.stream().filter(c -> c.getX().equals(xCordComp)).findAny().isPresent()) {
             Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCordComp)).mapToInt(c -> c.getY()).max().getAsInt();
+            if(yCord == 7) {
+                Validators.disableColumn(xCordComp);
+            }
             checkers.add(new Checker(xCordComp, yCord + 1, "Yellow"));
+
         } else {
 
             checkers.add(new Checker(xCordComp, 1, "Yellow"));

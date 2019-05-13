@@ -47,6 +47,7 @@ public class Engine {
         }
     }
 
+
     public void afterTurns(Board board) {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
             System.out.println("Red Wins");
@@ -55,5 +56,6 @@ public class Engine {
             System.out.println("Yellow Wins");
             buildLayout1.displayEnd();
         }
+
     }
 }
