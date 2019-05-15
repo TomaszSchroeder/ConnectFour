@@ -1,81 +1,52 @@
 package pl.org.schroeder;
 
-import javafx.application.Platform;
-
 public class Engine {
 
-    BuildLayout1 buildLayout1;
+    BuildLayout buildLayout;
     Board board = new Board();
 
-    public Engine(BuildLayout1 buildLayout1) {
-        this.buildLayout1 = buildLayout1;
+    public Engine() {
+        this.buildLayout = new BuildLayout(board);
 
         for (int i = 1; i < 8; i++) {
             int finalI = i;
-            buildLayout1.setEventHandlerOnButton(i, event -> {
+            buildLayout.setEventHandlerOnButton(i, event -> {
                 board.addChecker(CheckerColor.RED, finalI);
-                buttonHandling(board);
+                buttonHandling(board, finalI);
             });
         }
+        buildLayout.displayStart();
     }
 
-    public void buttonHandling(Board board) {
+    public void buttonHandling(Board board, Integer i) {
 
+        if (Validators.getAvailableColumns().contains(i)) {
 
-            buildLayout1.placeRedChecker(board);
-            if(checkWinner(board)==true) {
-                buildLayout1.displayEnd();
+            buildLayout.placeRedChecker(board);
+
+            if (checkWinner(board) == true) {
+                buildLayout.displayEndForWinnerPlayer();
             } else {
 
                 board.compMove(CheckerColor.YELLOW);
-
-                buildLayout1.placeYellowChecker(board);
-                if(checkWinner(board)==true) {
-                    buildLayout1.displayEnd();
+                buildLayout.placeYellowChecker(board);
+                if (checkWinner(board) == true) {
+                    buildLayout.displayEndForWinnerCPU();
                 }
-//
-//                checkWinner(board);
-//
-//                Platform.runLater(() -> afterTurns(board));
             }
+        }
     }
-
 
     public boolean checkWinner(Board board) {
         if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
             System.out.println("Red Wins");
-            buildLayout1.displayEnd();
+            buildLayout.displayEndForWinnerPlayer();
             return true;
         } else if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
             System.out.println("Yellow Wins");
-            buildLayout1.displayEnd();
+            buildLayout.displayEndForWinnerCPU();
             return true;
-        } return false;
-    }
-
-    public void checkRedWinner(Board board) {
-        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
-            System.out.println("Red Wins");
-            buildLayout1.displayEnd();
         }
-    }
-
-    public void checkYellowWinner(Board board) {
-        if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
-            System.out.println("Yellow Wins");
-            buildLayout1.displayEnd();
-        }
-    }
-
-
-    public void afterTurns(Board board) {
-        if ((board.checkWinningCondition("Red")) || (board.checkWinningCondition2("Red")) || (board.checkWinningCondition3("Red"))) {
-            System.out.println("Red Wins");
-            buildLayout1.displayEnd();
-        } else if ((board.checkWinningCondition("Yellow")) || (board.checkWinningCondition2("Yellow")) || (board.checkWinningCondition3("Yellow"))) {
-            System.out.println("Yellow Wins");
-            buildLayout1.displayEnd();
-        }
-
+        return false;
     }
 }

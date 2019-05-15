@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class Validators {
 
-    public static boolean isFinished;
-
     public static Map<Integer, Boolean> columnsConfig = new HashMap<>();
 
     private Validators() {
@@ -17,11 +15,11 @@ public class Validators {
     static {
         columnsConfig.put(1, true);
         columnsConfig.put(2, true);
-        columnsConfig.put(3, false);
-        columnsConfig.put(4, false);
-        columnsConfig.put(5, false);
-        columnsConfig.put(6, false);
-        columnsConfig.put(7, false);
+        columnsConfig.put(3, true);
+        columnsConfig.put(4, true);
+        columnsConfig.put(5, true);
+        columnsConfig.put(6, true);
+        columnsConfig.put(7, true);
     }
 
     public static Set<Integer> getAvailableColumns () {

@@ -12,8 +12,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
 
-        BuildLayout1 buildLayout1 = new BuildLayout1();
-        buildLayout1.displayStart();
+        Engine engine = new Engine();
 
     }
 }

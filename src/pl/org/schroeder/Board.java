@@ -8,12 +8,12 @@ public class Board {
 
     private ArrayList<Checker> checkers = new ArrayList<>();
 
-    public Board() {
-        checkers.addAll(Arrays.asList(
-        ));
+    public void clearCheckers() {
+        checkers.clear();
     }
 
     public ArrayList<Checker> getCheckers() {
+
         return checkers;
     }
 
@@ -90,10 +90,8 @@ public class Board {
         return false;
     }
 
-
     // Human adding a checker
     public Boolean addChecker(String color, Integer xCord) {
-
 
             if (checkers.stream().filter(c -> c.getX().equals(xCord)).findAny().isPresent()) {
                 Integer yCord = checkers.stream().filter(c -> c.getX().equals(xCord)).mapToInt(c -> c.getY()).max().getAsInt();
@@ -106,9 +104,7 @@ public class Board {
 
                 checkers.add(new Checker(xCord, 1, color));
             }
-
         return true;
-
     }
 
     // Computer adding a checker
@@ -137,10 +133,5 @@ public class Board {
         return "Board{" +
                 "checkers=" + checkers +
                 '}';
-    }
-
-    public static int randomNumber(int min, int max) {
-        Random random = new Random();
-        return random.nextInt((max - min) + 1) + min;
     }
 }

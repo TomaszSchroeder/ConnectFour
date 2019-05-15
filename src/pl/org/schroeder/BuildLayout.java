@@ -20,18 +20,18 @@ import javafx.stage.Stage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuildLayout1 {
+public class BuildLayout {
 
     Stage stage = new Stage();
 
-    Engine engine;
     Pane discField = new Pane();
     Board board;
 
     Map<Integer, Button> buttonList = new HashMap<>();
 
+    public BuildLayout(Board board) {
 
-    public BuildLayout1() {
+        this.board = board;
 
         buttonList.put(1, new Button("Column One"));
         buttonList.put(2, new Button("Column Two"));
@@ -40,8 +40,6 @@ public class BuildLayout1 {
         buttonList.put(5, new Button("Column Five"));
         buttonList.put(6, new Button("Column Six"));
         buttonList.put(7, new Button("Column Seven"));
-
-        this.engine = new Engine(this);
     }
 
     public void setEventHandlerOnButton(Integer id, EventHandler eventHandler) {
@@ -95,7 +93,8 @@ public class BuildLayout1 {
 
     public void displayStart() {
 
-        board = new Board();
+        board.clearCheckers();
+        discField.getChildren().clear();
 
         VBox mainWindow = new VBox(5);
         HBox starters = new HBox(5);
@@ -123,12 +122,23 @@ public class BuildLayout1 {
         stage.show();
     }
 
-    public void displayEnd() {
-
+    public void displayEndForWinnerPlayer() {
         VBox winnerScreen = new VBox();
         Label winInfo = new Label("You win, congratulations! Do you want to play again?");
         winInfo.setFont(new Font(20));
 
+        Button again = new Button("YES");
+        Button nope = new Button("NO");
+        again.setOnAction(e -> displayStart());
+        nope.setOnAction(e -> System.exit(-1));
+
+        winnerScreen.getChildren().addAll(winInfo, again, nope);
+        Scene winnerScene = new Scene(winnerScreen, 500, 400);
+        stage.setScene(winnerScene);
+        stage.show();
+    }
+
+    public void displayEndForWinnerCPU() {
         VBox loserScreen = new VBox();
         Label loseInfo = new Label("Such a shame, you've lost! Do you want to play again?");
         loseInfo.setFont(new Font(20));
@@ -138,18 +148,10 @@ public class BuildLayout1 {
         again.setOnAction(e -> displayStart());
         nope.setOnAction(e -> System.exit(-1));
 
-        if ((engine.board.checkWinningCondition("Red")) || (engine.board.checkWinningCondition2("Red")) || (engine.board.checkWinningCondition3("Red"))) {
-            winnerScreen.getChildren().addAll(winInfo, again, nope);
-            Scene winnerScene = new Scene(winnerScreen, 500, 400);
-            stage.setScene(winnerScene);
-            stage.show();
-
-        } else if ((engine.board.checkWinningCondition("Yellow")) || (engine.board.checkWinningCondition2("Yellow")) || (engine.board.checkWinningCondition3("Yellow"))) {
-            loserScreen.getChildren().addAll(loseInfo, again, nope);
-            Scene loserScene = new Scene(loserScreen, 500, 400);
-            stage.setScene(loserScene);
-            stage.show();
-        }
+        loserScreen.getChildren().addAll(loseInfo, again, nope);
+        Scene loserScene = new Scene(loserScreen, 500, 400);
+        stage.setScene(loserScene);
+        stage.show();
     }
 
     public void placeRedChecker(Board board) {
@@ -171,6 +173,4 @@ public class BuildLayout1 {
 
         discField.getChildren().add(drawYellowDisc(xAxisYel, yAxisYel));
     }
-
-
 }
